@@ -1,28 +1,31 @@
 <?php
 
-namespace App\Filament\Resources\Users\Tables;
+namespace App\Filament\Resources\Products\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\DeleteAction;
 use Filament\Tables\Table;
 
-class UsersTable
+class ProductsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('nombre')
                     ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
+                TextColumn::make('precio_venta')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('descripcion')
                     ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
+                TextColumn::make('categoria_id')
+                    ->numeric()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
@@ -35,10 +38,11 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('categoria_id')
+                    ->relationship('category', 'nombre')
+                    ->label('Categoría'),
             ])
             ->recordActions([
-                //ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

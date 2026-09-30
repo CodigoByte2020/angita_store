@@ -18,6 +18,18 @@ use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
+    protected static ?string $navigationLabel = 'Usuario';
+    protected static ?string $pluralModelLabel = 'Usuarios';
+
+    public static function getModelLabel(): string
+    {
+        return 'Usuario';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Usuarios';
+    }
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

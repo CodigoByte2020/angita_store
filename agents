@@ -1,0 +1,43 @@
+# Proyecto: Sistema Web para Bodega Familiar (Angita Store)
+
+## Objetivo
+Sprint 1: catálogo de categorías y productos para la bodega familiar "Angita Store".
+
+## Stack Tecnológico
+- PHP 8.4.26 + Laravel + Filament 4
+- MySQL (host 127.0.0.1, puerto 3306)
+- Usuario: admin / admin
+- Base de datos: angita_bd (configurada en .env)
+
+## Sprint 1 — Entidades
+
+### Category
+- `id`: PK autoincremental
+- `nombre`: Texto, obligatorio, único
+- `descripcion`: Texto opcional
+- `estado`: Booleano, default `true`
+- Relación 1:N con Product (una categoría puede tener muchos productos; un producto pertenece a una sola categoría)
+
+### Product
+- `id`: PK autoincremental
+- `nombre`: Texto, obligatorio
+- `precio_compra`: Decimal, obligatorio
+- `precio_venta`: Decimal, obligatorio
+- `categoria_id`: FK → categories.id
+- `estado`: Booleano, default `true`
+
+## Funcionalidades Sprint 1 (Filament 4)
+- CategoryResource: CRUD
+- ProductResource: CRUD con paginación y filtro por `categoria_id`
+- Relación visible entre Product y Category: en ProductResource, campo Select para elegir Category (formulario); columna con nombre de Category (tabla); en CategoryResource, lista de productos asociados
+
+## Reglas de Negocio
+- Un Product debe tener una Category.
+- Una Category puede tener muchos Product; un Product solo pertenece a una Category.
+- `nombre` de Category único.
+
+## Notas del Entorno
+- `.env`: DB_DATABASE=angita_bd
+- Usuario admin debe tener GRANT ALL PRIVILEGES sobre angita_bd
+- Si hay errores de conexión: `php artisan config:clear`
+- Para ocultar la vista `view`: comentar `Pages\ViewProduct::route(...)` en `getPages()` o `ViewAction::make()` en la tabla
