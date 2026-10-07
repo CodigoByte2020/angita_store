@@ -18,15 +18,15 @@ class ProductsTable
             ->columns([
                 TextColumn::make('nombre')
                     ->searchable(),
+                TextColumn::make('category.nombre')
+                    ->label('Categoría')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('precio_venta')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('descripcion')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('categoria_id')
-                    ->numeric()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
