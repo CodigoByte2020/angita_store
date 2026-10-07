@@ -26,7 +26,6 @@ class ProductsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('descripcion')
-                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
