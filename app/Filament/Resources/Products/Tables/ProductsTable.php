@@ -22,7 +22,8 @@ class ProductsTable
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('descripcion')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('categoria_id')
                     ->numeric()
                     ->sortable()
